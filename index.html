@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Rooftop Intelligence Map</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="map"></div>
+  <header class="topbar">
+
+  <div class="brand">
+    <div class="brand-title">Solar Rooftop Intelligence</div>
+    <div class="brand-sub">
+      Map-first urban energy planning prototype
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab active" data-mode="rooftop">
+      Rooftop Suitability
+    </button>
+
+    <button class="tab" data-mode="balance">
+      Energy Balance
+    </button>
+
+    <button class="tab" data-mode="network">
+      Network Scenario
+    </button>
+
+    <button class="tab" data-mode="about">
+      About
+    </button>
+  </nav>
+
+</header>
+
+
+  
+
+
+
+
+  
+
+  
+
+<aside class="left-panel">
+  <div class="section-title collapsible-filter" id="kpiToggle">
+  Project KPIs
+</div>
+
+<section class="kpi-bar collapsed" id="kpiBar">
+
+  <div class="kpi-card">
+   <span class="kpi-label">Solar-Ready Rooftops</span>
+    <strong id="kpi-rooftops">0</strong>
+  </div>
+
+  <div class="kpi-card">
+  <span class="kpi-label">Potential Annual Production</span>
+    <strong id="kpi-production">0 MWh</strong>
+  </div>
+
+  <div class="kpi-card">
+   <span class="kpi-label">Community Energy Coverage</span>
+    <strong id="kpi-co2">0 t</strong>
+  </div>
+
+  <div class="kpi-card">
+    <span class="kpi-label">Shared Energy Potential</span>
+    <strong id="kpi-households">0</strong>
+  </div>
+
+</section>
+    <div class="section-title">Visible Layers</div>
+
+    <button class="layer active" data-layer="buildings">
+      <span><i class="dot yellow"></i>Suitable rooftops</span>
+      <span class="toggle on"></span>
+    </button>
+
+    <button class="layer active" data-layer="districts">
+      <span><i class="dot cyan"></i>District boundaries</span>
+      <span class="toggle on"></span>
+    </button>
+
+    <button class="layer" data-layer="deficit">
+      <span><i class="dot red"></i>Deficit zones</span>
+      <span class="toggle"></span>
+    </button>
+
+    <button class="layer" data-layer="surplus">
+      <span><i class="dot green"></i>Surplus zones</span>
+      <span class="toggle"></span>
+    </button>
+
+    <button class="layer" data-layer="flows">
+      <span><i class="dot purple"></i>Energy flow network</span>
+      <span class="toggle"></span>
+    </button>
+
+    <div class="section-title collapsible-filter" id="filterToggle">
+  Rooftop Filters
+</div>
+<div class="filter-group" id="filterGroup">
+    <button class="filter active" data-filter="all">All rooftops</button>
+    <button class="filter" data-filter="excellent">Excellent suitability</button>
+    <button class="filter" data-filter="good">Good suitability</button>
+    <button class="filter" data-filter="public">Strategic rooftops</button>
+  </aside>
+  </div>
+
+  <aside class="right-panel">
+    <div class="section-title collapsible-filter" id="rightPanelToggle">
+  Selected Feature
+</div>
+<div id="rightPanelContent" class="collapsed">
+    <div class="card">
+      <h3 id="feature-title">Click a rooftop</h3>
+      <div class="kpi"><span>Suitability</span><strong id="feature-score">—</strong></div>
+      <div class="kpi"><span>Roof area</span><strong id="feature-area">—</strong></div>
+      <div class="kpi"><span>Estimated capacity</span><strong id="feature-capacity">—</strong></div>
+      <div class="kpi"><span>Estimated production</span><strong id="feature-production">—</strong></div>
+    </div>
+    <div class="kpi"><span>CO₂ avoided</span><strong id="feature-co2">—</strong></div>
+
+<div class="kpi"><span>Households powered</span><strong id="feature-households">—</strong></div>
+
+<div class="kpi"><span>Priority level</span><strong id="feature-priority">—</strong></div>
+
+    <div class="section-title">Recommended Action</div>
+    <div class="action" id="feature-action">
+      Select a rooftop or district to see the planning recommendation.
+    </div>
+    </div>
+  </aside>
+
+  <div class="legend">
+    <div><span class="legend-box excellent"></span>Excellent rooftop</div>
+    <div><span class="legend-box good"></span>Good rooftop</div>
+    <div><span class="legend-box moderate"></span>Moderate rooftop</div>
+    <div><span class="legend-line"></span>Energy sharing flow</div>
+  </div>
+
+  <div class="about" id="about">
+  <div class="about-card">
+
+    <h2>About This Prototype</h2>
+
+    <p>
+      Solar Rooftop Intelligence is an interactive WebGIS dashboard prototype
+      designed to visualize rooftop solar potential and local energy-sharing
+      scenarios at the urban scale.
+    </p>
+
+    <div class="about-grid">
+
+      <div class="about-item">
+        <h3>Data Used</h3>
+        <p>
+          The prototype uses building footprint geometries and a dark basemap
+          to create a spatial interface for rooftop energy analysis.
+        </p>
+      </div>
+
+      <div class="about-item">
+        <h3>Estimated Indicators</h3>
+        <p>
+          Rooftop area, PV capacity, annual production, CO₂ avoided and
+          suitability score are simulated indicators used for dashboard
+          demonstration and decision-support logic.
+        </p>
+      </div>
+
+      <div class="about-item">
+        <h3>Methodology</h3>
+        <p>
+          Building footprint → rooftop suitability → estimated solar capacity
+          → annual production → surplus/deficit zones → energy-sharing network.
+        </p>
+      </div>
+
+      <div class="about-item">
+        <h3>Purpose</h3>
+        <p>
+          The goal is to demonstrate how GIS, spatial data, and dashboard design
+          can support urban energy planning, stakeholder communication, and
+          renewable energy decision-making.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="method-note">
+      This is a conceptual WebGIS prototype. The current KPI values are not
+      engineering-certified solar calculations, but simulated indicators created
+      to demonstrate spatial analysis, visualization, and dashboard interaction.
+    </div>
+
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js?v=10"></script>
+
+</body>
+</html>
