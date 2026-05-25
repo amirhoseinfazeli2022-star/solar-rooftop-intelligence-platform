@@ -46,4 +46,4 @@ in urban environments.
 
 ## Dashboard Preview
 
-![Dashboard Overview](screenshots/dashboard-overview.png)
+![Dashboard Overview](screenshoot/dashboard-overview.png)
